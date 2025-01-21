@@ -1,81 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Atrapar Estrellas</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ml5@0.12.2/dist/ml5.min.js"></script>
+    <script src="sketch.js"></script>
+    <style>
+        body {
+            margin: 0;
+            background-color: #0d0d0d; /* Color de fondo oscuro */
+            color: #ffffff; /* Color de texto blanco */
+            font-family: 'Arial', sans-serif; /* Fuente moderna */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* Ocupa toda la altura de la ventana */
+            overflow: hidden; /* Evita barras de desplazamiento */
+        }
+        
+        h1 {
+            font-size: 3rem; /* Tamaño grande para el título */
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5); /* Sombra verde */
+            margin-bottom: 10px; /* Espacio inferior */
+        }
 
-    <script src="https://cdn.jsdelivr.net/npm/p5@latest/lib/p5.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/p5@latest/lib/addons/p5.dom.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/ml5@latest/dist/ml5.min.js"></script>
-  <script src="camera.js" defer></script>
-  <script src="game.js" defer></script>
-  <style>
-    
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 0;
-    }
-    #main-container {
-      display: flex;
-      width: 100%;
-      height: 100vh;
-    }
-    .section {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    canvas {
-      display: block;
-    }
-  </style>
+        p {
+            font-size: 1.5rem; /* Tamaño moderado para el texto */
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Sombra blanca */
+            margin-bottom: 20px; /* Espacio inferior */
+        }
+
+        canvas {
+            border: 2px solid rgba(0, 255, 0, 0.5); /* Borde verde brillante para el canvas */
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.7); /* Sombra verde brillante */
+            border-radius: 10px; /* Bordes redondeados */
+        }
+
+        /* Animación futurista */
+        @keyframes neon {
+            0% {
+                text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(0, 255, 0, 1);
+            }
+            100% {
+                text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+            }
+        }
+
+        h1 {
+            animation: neon 1.5s infinite alternate; /* Animación de neón en el título */
+        }
+    </style>
 </head>
 <body>
-  <h1>GestureDrive: Controla el Auto con Gestos</h1>
-  <div id="description">
-    <h2>Descripción del Proyecto</h2>
-    <p>"GestureDrive" es una aplicación web interactiva que permite controlar un automóvil virtual en un circuito mediante gestos de las manos, utilizando ml5.js y p5.js. A través de la cámara del navegador, el sistema detecta movimientos específicos de las manos y los traduce en acciones como acelerar, frenar o girar, proporcionando una experiencia intuitiva y divertida. El objetivo es completar el recorrido evitando obstáculos, mientras el usuario experimenta cómo la inteligencia artificial puede interactuar con gestos humanos en tiempo real.</p>
-
-    <h2>Gestos y Acciones del Auto</h2>
-    <ol>
-      <li><strong>Mano derecha levantada (palma abierta):</strong>
-        <ul>
-          <li><strong>Acción:</strong> Acelerar.</li>
-          <li><strong>Descripción:</strong> Mientras la mano derecha esté levantada, el auto incrementará su velocidad de manera gradual.</li>
-        </ul>
-      </li>
-      <li><strong>Puño cerrado (cualquier mano):</strong>
-        <ul>
-          <li><strong>Acción:</strong> Frenar.</li>
-          <li><strong>Descripción:</strong> Al cerrar el puño, el auto reducirá su velocidad hasta detenerse.</li>
-        </ul>
-      </li>
-      <li><strong>Movimiento lateral de la mano derecha hacia la izquierda:</strong>
-        <ul>
-          <li><strong>Acción:</strong> Girar a la izquierda.</li>
-          <li><strong>Descripción:</strong> El auto gira hacia la izquierda mientras se mantenga este gesto.</li>
-        </ul>
-      </li>
-      <li><strong>Movimiento lateral de la mano derecha hacia la derecha:</strong>
-        <ul>
-          <li><strong>Acción:</strong> Girar a la derecha.</li>
-          <li><strong>Descripción:</strong> El auto gira hacia la derecha mientras se mantenga este gesto.</li>
-        </ul>
-      </li>
-      <li><strong>Ambas manos levantadas:</strong>
-        <ul>
-          <li><strong>Acción:</strong> Reiniciar el auto.</li>
-          <li><strong>Descripción:</strong> Si el auto se detiene o choca, este gesto lo reinicia al punto de inicio del circuito.</li>
-        </ul>
-      </li>
-    </ol>
-  </div>
-  <div id="main-container">
-    <div class="section" id="camera-view"></div>
-    <div class="section" id="game-view"></div>
-  </div>
+    <h1>Juego de Atrapar Estrellas</h1>
+    <p>Mueve tu cabeza para atrapar las estrellas. ¡Gana puntos!</p>
 </body>
 </html>
